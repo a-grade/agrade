@@ -1,0 +1,25 @@
+{
+  "name": "agrade",
+  "version": "0.0.0",
+  "description": "",
+  "main": " ",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/a-grade/agrade.git"
+  },
+  "author": "0tho, muriloDAG",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/a-grade/agrade/issues"
+  },
+  "homepage": "https://github.com/a-grade/agrade#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
+}
