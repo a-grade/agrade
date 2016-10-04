@@ -10,4 +10,5 @@ script:
   - npm test
   
 after_success:
+  - gulp build
   - test $TRAVIS_BRANCH = "development" && firebase deploy --token ${FIREBASE_TOKEN}
