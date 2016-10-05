@@ -1,4 +1,4 @@
 
-['hello4'].map((greeding) => {
-	console.log(greeding);
+[ "hello4" ].map( (greeding) => {
+	console.log( greeding );
 });

@@ -10,13 +10,13 @@ const util = require("gulp-util");
 
 /* convert from es6 to es5 */
 const	browserify = require("browserify");
-const	babelify   = require("babelify");
+// const	babelify   = require("babelify");
 const	source     = require("vinyl-source-stream");
 const	buffer     = require("vinyl-buffer");
 const	browser    = require("browser-sync");
 const	sass       = require("gulp-sass");
 const	clean      = require("gulp-clean");
-const	uglify     = require("gulp-uglify");
+// const	uglify     = require("gulp-uglify");
 const	sourcemaps = require("gulp-sourcemaps");
 const	jscs       = require("gulp-jscs");
 const	debug      = require("gulp-debug");
