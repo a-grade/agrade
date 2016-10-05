@@ -1,9 +1,9 @@
 var assert = require('assert');
-var request = require('request'),
-	s = require('string'),
-	cheerio = require('cheerio'),
-	expect = require('chai').expect,
-	baseUrl = 'http://localhost:3000';
+var request = require('request');
+var s = require('string');
+var cheerio = require('cheerio');
+var expect = require('chai').expect;
+var baseUrl = 'http://localhost:3000';
 process.env.NODE_ENV = 'test';
 
 describe('Home page', function () {
