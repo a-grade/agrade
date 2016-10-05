@@ -1,0 +1,10 @@
+{
+	"curly" : true,
+	"eqeqeq" : true,
+	"esversion" : 6,
+	"freeze": true,
+	"latedef": true,
+	"nocomma": true,
+	"undef": true,
+	"unused": true
+}
