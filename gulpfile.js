@@ -19,7 +19,7 @@ const
 /*
 * Delete the contents of the build directory
 */
-gulp.task('clean', function() {
+gulp.task('clean', () => {
 	gulp.src('build', {read: false})
 		.pipe(clean());
 });
@@ -27,7 +27,7 @@ gulp.task('clean', function() {
 /*
  * Transpile es6 code to es5 using Babel and browserify
  */
-gulp.task('transpile', function() {
+gulp.task('transpile', () => {
 	return browserify('src/js/script.js', { debug : true })
 		.transform('babelify', {presets: ['es2015']})
 		.bundle()
@@ -44,7 +44,7 @@ gulp.task('transpile', function() {
 /*
  * Start a server from buid directory
  */
-gulp.task('serve', function() {
+gulp.task('serve', () => {
 	browser({
 		server: {
 			baseDir: './src'
@@ -55,7 +55,7 @@ gulp.task('serve', function() {
 /*
  * Convert SASS files to CSS
  */
-gulp.task('sass', function() {
+gulp.task('sass', () => {
 	return gulp.src('src/sass/style.scss')
 		.pipe(sass({
 			style: 'compressed'
@@ -67,7 +67,7 @@ gulp.task('sass', function() {
 /*
  * Watch for when JS, HTML, or SCSS files change so they can be updated
  */
-gulp.task('watch', function() {
+gulp.task('watch', () => {
 	gulp.watch('src/js/**/*.js', ['transpile']);
 	gulp.watch('src/**/*.html', []);
 	gulp.watch('src/sass/**/*.scss', ['sass']);
@@ -76,12 +76,12 @@ gulp.task('watch', function() {
 gulp.task('build', ['clean', 'sass', 'transpile']);
 gulp.task('default', ['build', 'serve', 'watch']);
 
-gulp.task('test', () => {
+gulp.task('test', ['serve'], () => {
 	return gulp.src(['test/**/*.js'], { read: false })
 		.pipe(mocha({ reporter: 'spec' }))
 		.on('error', util.log);
 });
 
-gulp.task('watch-test', () => {
+gulp.task('watch-test', ['serve'], () => {
 	gulp.watch(['test/**'], ['test']);
 });

@@ -3,7 +3,7 @@ var request = require('request'),
 	s = require('string'),
 	cheerio = require('cheerio'),
 	expect = require('chai').expect,
-	baseUrl = 'http://localhost:5000';
+	baseUrl = 'http://localhost:3000';
 process.env.NODE_ENV = 'test';
 
 describe('Home page', function () {
