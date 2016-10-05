@@ -8,7 +8,11 @@ install:
 
 script:
   - npm test
-  
+
 after_success:
   - gulp build
   - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "develop" && firebase deploy --token ${FIREBASE_TOKEN}
+
+cache:
+  directories:
+    - node_modules
