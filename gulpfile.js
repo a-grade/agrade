@@ -1,3 +1,7 @@
+/* Load project configuration file */
+const pkg = require('./package.json');
+const dirs = pkg.directories;
+
 const gulp = require('gulp');
 
 /* testing */
@@ -5,22 +9,21 @@ const mocha = require('gulp-mocha');
 const util = require('gulp-util');
 
 /* convert from es6 to es5 */
-const
-	browserify = require('browserify'),
-	babelify   = require('babelify'),
-	source     = require('vinyl-source-stream'),
-	buffer     = require('vinyl-buffer'),
-	browser    = require('browser-sync'),
-	sass       = require('gulp-sass'),
-	clean      = require('gulp-clean'),
-	uglify     = require('gulp-uglify'),
-	sourcemaps = require('gulp-sourcemaps');
+const	browserify = require('browserify');
+const	babelify   = require('babelify');
+const	source     = require('vinyl-source-stream');
+const	buffer     = require('vinyl-buffer');
+const	browser    = require('browser-sync');
+const	sass       = require('gulp-sass');
+const	clean      = require('gulp-clean');
+const	uglify     = require('gulp-uglify');
+const	sourcemaps = require('gulp-sourcemaps');
 
 /*
 * Delete the contents of the build directory
 */
 gulp.task('clean', () => {
-	gulp.src('build', {read: false})
+	gulp.src( dirs.build , {read: false})
 		.pipe(clean());
 });
 
@@ -28,7 +31,7 @@ gulp.task('clean', () => {
  * Transpile es6 code to es5 using Babel and browserify
  */
 gulp.task('transpile', () => {
-	return browserify('src/js/script.js', { debug : true })
+	return browserify( dirs.src + 'js/script.js', { debug : true })
 		.transform('babelify', {presets: ['es2015']})
 		.bundle()
 		.on('error', util.log.bind(util, 'Browserify Error'))
@@ -37,7 +40,7 @@ gulp.task('transpile', () => {
 		.pipe(sourcemaps.init({ loadMaps: true }))
 		//.pipe(uglify())
 		.pipe(sourcemaps.write('.'))
-		.pipe(gulp.dest('./src/build'))
+		.pipe(gulp.dest( dirs.build ))
 		.pipe(browser.stream());
 });
 
@@ -47,7 +50,7 @@ gulp.task('transpile', () => {
 gulp.task('serve', () => {
 	browser({
 		server: {
-			baseDir: './src'
+			baseDir: dirs.build
 		}
 	});
 });
@@ -56,11 +59,11 @@ gulp.task('serve', () => {
  * Convert SASS files to CSS
  */
 gulp.task('sass', () => {
-	return gulp.src('src/sass/style.scss')
+	return gulp.src( dirs.src + 'sass/style.scss')
 		.pipe(sass({
 			style: 'compressed'
 		}).on('error', sass.logError))
-		.pipe(gulp.dest('src/build'))
+		.pipe(gulp.dest( dirs.build ))
 		.pipe(browser.stream());
 });
 
@@ -68,20 +71,20 @@ gulp.task('sass', () => {
  * Watch for when JS, HTML, or SCSS files change so they can be updated
  */
 gulp.task('watch', () => {
-	gulp.watch('src/js/**/*.js', ['transpile']);
-	gulp.watch('src/**/*.html', []);
-	gulp.watch('src/sass/**/*.scss', ['sass']);
+	gulp.watch(dirs.src + 'js/**/*.js', ['transpile']);
+	gulp.watch(dirs.src + '**/*.html', []);
+	gulp.watch(dirs.src + 'sass/**/*.scss', ['sass']);
 });
 
 gulp.task('build', ['clean', 'sass', 'transpile']);
 gulp.task('default', ['build', 'serve', 'watch']);
 
 gulp.task('test', ['serve'], () => {
-	return gulp.src(['test/**/*.js'], { read: false })
+	return gulp.src([ dirs.test + '**/*.js'], { read: false })
 		.pipe(mocha({ reporter: 'spec' }))
 		.on('error', util.log);
 });
 
 gulp.task('watch-test', ['serve'], () => {
-	gulp.watch(['test/**'], ['test']);
+	gulp.watch([ dirs.test + '**'], ['test']);
 });
