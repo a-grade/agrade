@@ -4,7 +4,10 @@
   "description": "",
   "main": " ",
   "directories": {
-    "test": "tests"
+		"documentation": "documentation/",
+		"source": "src/",
+		"build": "build/",
+    "test": "test/"
   },
   "scripts": {
     "test": "exit 0"
