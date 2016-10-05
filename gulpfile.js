@@ -51,7 +51,7 @@ gulp.task("lint:js", () => {
 /*
  * Transpile es6 code to es5 using Babel and browserify
  */
-gulp.task("transpile", () => {
+gulp.task("transpile", [ "linst:js" ], () => {
 	return browserify( dirs.source + "js/script.js", { debug: true })
 		.transform("babelify", { presets: [ "es2015" ] })
 		.bundle()
