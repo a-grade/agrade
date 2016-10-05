@@ -18,20 +18,41 @@ const	sass       = require("gulp-sass");
 const	clean      = require("gulp-clean");
 const	uglify     = require("gulp-uglify");
 const	sourcemaps = require("gulp-sourcemaps");
+const	jscs       = require("gulp-jscs");
+const	debug      = require("gulp-debug");
+const	eslint     = require("gulp-eslint");
 
 /*
-* Delete the contents of the build directory
-*/
+ * Delete the contents of the build directory
+ */
 gulp.task("clean", () => {
 	gulp.src( dirs.build, { read: false })
 		.pipe( clean() );
 });
 
 /*
+ * Lint js and jsx files
+ */
+gulp.task("lint:js", () => {
+	return gulp.src([ "**/*.{js,jsx}", "!node_modules/**" ])
+	// jscs
+	.pipe( debug({ title: "jscs", minimal: false }) )
+	.pipe( jscs({ fix: true }) )
+	.pipe( jscs.reporter() )
+	.pipe( jscs.reporter("fail") )
+	// eslint
+	.pipe( eslint({ fix: true }) )
+	.pipe( eslint.format() )
+	.pipe( eslint.failAfterError() )
+	// output
+	.pipe( gulp.dest( "./" ) );
+});
+
+/*
  * Transpile es6 code to es5 using Babel and browserify
  */
 gulp.task("transpile", () => {
-	return browserify( dirs.src + "js/script.js", { debug: true })
+	return browserify( dirs.source + "js/script.js", { debug: true })
 		.transform("babelify", { presets: [ "es2015" ] })
 		.bundle()
 		.on("error", util.log.bind( util, "Browserify Error") )
@@ -59,7 +80,7 @@ gulp.task("serve", () => {
  * Convert SASS files to CSS
  */
 gulp.task("sass", () => {
-	return gulp.src( dirs.src + "sass/style.scss")
+	return gulp.src( dirs.source + "sass/style.scss")
 		.pipe( sass({
 			style: "compressed"
 		}).on("error", sass.logError ) )
@@ -71,9 +92,9 @@ gulp.task("sass", () => {
  * Watch for when JS, HTML, or SCSS files change so they can be updated
  */
 gulp.task("watch", () => {
-	gulp.watch( dirs.src + "js/**/*.js", [ "transpile" ]);
-	gulp.watch( dirs.src + "**/*.html", []);
-	gulp.watch( dirs.src + "sass/**/*.scss", [ "sass" ]);
+	gulp.watch( dirs.source + "js/**/*.js", [ "transpile" ]);
+	gulp.watch( dirs.source + "**/*.html", []);
+	gulp.watch( dirs.source + "sass/**/*.scss", [ "sass" ]);
 });
 
 gulp.task("build", [ "clean", "sass", "transpile" ]);
