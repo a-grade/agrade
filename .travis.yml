@@ -11,4 +11,4 @@ script:
   
 after_success:
   - gulp build
-  - test $TRAVIS_BRANCH = "development" && firebase deploy --token ${FIREBASE_TOKEN}
+  - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "develop" && firebase deploy --token ${FIREBASE_TOKEN}
