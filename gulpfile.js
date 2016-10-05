@@ -22,36 +22,34 @@ const	jscs       = require("gulp-jscs");
 const	debug      = require("gulp-debug");
 const	eslint     = require("gulp-eslint");
 
-/*
- * Delete the contents of the build directory
- */
+// Delete the contents of the build directory
 gulp.task("clean", () => {
 	gulp.src( dirs.build, { read: false })
 		.pipe( clean() );
 });
 
-/*
- * Lint js and jsx files
- */
-gulp.task("lint:js", () => {
-	return gulp.src([ "**/*.{js,jsx}", "!node_modules/**" ])
-	// jscs
-	.pipe( debug({ title: "jscs", minimal: false }) )
-	.pipe( jscs({ fix: true }) )
-	.pipe( jscs.reporter() )
-	.pipe( jscs.reporter("fail") )
-	// eslint
-	.pipe( eslint({ fix: true }) )
-	.pipe( eslint.format() )
-	.pipe( eslint.failAfterError() )
-	// output
-	.pipe( gulp.dest( "./" ) );
+// Copy relevant files from src to build
+gulp.task("copy-files", function() {
+	gulp.src("./src/**/*.{html,png}" )
+		.pipe( gulp.dest("./build" ) );
 });
 
-/*
- * Transpile es6 code to es5 using Babel and browserify
- */
-gulp.task("transpile", [ "linst:js" ], () => {
+// Lint js and jsx files
+gulp.task("lint:js", () => {
+	return gulp.src([ "src/**/*.{js,jsx}", "!node_modules/**" ])
+		// jscs
+		.pipe( debug({ title: "jscs", minimal: false }) )
+		.pipe( jscs({ fix: true }) )
+		.pipe( jscs.reporter() )
+		.pipe( jscs.reporter("fail") )
+		// eslint
+		.pipe( eslint({ fix: true }) )
+		.pipe( eslint.format() )
+		.pipe( eslint.failAfterError() );
+});
+
+// Transpile es6 code to es5 using Babel and browserify
+gulp.task("transpile", [ "lint:js" ], () => {
 	return browserify( dirs.source + "js/script.js", { debug: true })
 		.transform("babelify", { presets: [ "es2015" ] })
 		.bundle()
@@ -65,10 +63,8 @@ gulp.task("transpile", [ "linst:js" ], () => {
 		.pipe( browser.stream() );
 });
 
-/*
- * Start a server from buid directory
- */
-gulp.task("serve", () => {
+// Start a server from buid directory
+gulp.task("serve", [ "build" ],() => {
 	browser({
 		server: {
 			baseDir: dirs.build
@@ -76,9 +72,7 @@ gulp.task("serve", () => {
 	});
 });
 
-/*
- * Convert SASS files to CSS
- */
+// Convert SASS files to CSS
 gulp.task("sass", () => {
 	return gulp.src( dirs.source + "sass/style.scss")
 		.pipe( sass({
@@ -88,16 +82,14 @@ gulp.task("sass", () => {
 		.pipe( browser.stream() );
 });
 
-/*
- * Watch for when JS, HTML, or SCSS files change so they can be updated
- */
-gulp.task("watch", () => {
+// Watch for when JS, HTML, or SCSS files change so they can be updated
+gulp.task("watch", [ "build" ],  () => {
 	gulp.watch( dirs.source + "js/**/*.js", [ "transpile" ]);
-	gulp.watch( dirs.source + "**/*.html", []);
+	gulp.watch( dirs.source + "**/*.html", [ "copy-files" ]);
 	gulp.watch( dirs.source + "sass/**/*.scss", [ "sass" ]);
 });
 
-gulp.task("build", [ "clean", "sass", "transpile" ]);
+gulp.task("build", [ "clean", "sass", "transpile", "copy-files" ]);
 gulp.task("default", [ "build", "serve", "watch" ]);
 
 gulp.task("test", [ "serve" ], () => {
