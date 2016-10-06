@@ -23,6 +23,7 @@
 		"no-use-before-define": "error",
 		"no-sequences": "error",
 		"no-undefined": "error",
+		"no-unused-vars": "off",
 		"no-console": "warn"
 	}
 }

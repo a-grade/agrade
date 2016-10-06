@@ -1,35 +1,29 @@
 /* Load project configuration file */
-const pkg = require("./package.json");
-const dirs = pkg.directories;
+const	pkg         = require("./package.json");
+const	dirs        = pkg.directories;
 
-const gulp = require("gulp");
+const	gulp        = require("gulp");
 
 /* testing */
-const mocha = require("gulp-mocha");
-const util = require("gulp-util");
+const	mocha       = require("gulp-mocha");
+const	util        = require("gulp-util");
 
 /* convert from es6 to es5 */
-const	browserify = require("browserify");
+const	browserify  = require("browserify");
 // const	babelify   = require("babelify");
-const	source     = require("vinyl-source-stream");
-const	buffer     = require("vinyl-buffer");
-const	browser    = require("browser-sync");
-const	sass       = require("gulp-sass");
-const	clean      = require("gulp-clean");
+const	source      = require("vinyl-source-stream");
+const	buffer      = require("vinyl-buffer");
+const	superstatic = require('superstatic');
+const	browser     = require("browser-sync").create();
+const	sass        = require("gulp-sass");
 // const	uglify     = require("gulp-uglify");
-const	sourcemaps = require("gulp-sourcemaps");
-const	jscs       = require("gulp-jscs");
-const	debug      = require("gulp-debug");
-const	eslint     = require("gulp-eslint");
-
-// Delete the contents of the build directory
-gulp.task("clean", () => {
-	gulp.src( dirs.build, { read: false })
-		.pipe( clean() );
-});
+const	sourcemaps  = require("gulp-sourcemaps");
+const	jscs        = require("gulp-jscs");
+const	debug       = require("gulp-debug");
+const	eslint      = require("gulp-eslint");
 
 // Copy relevant files from src to build
-gulp.task("copy-files", function() {
+gulp.task("copy-files", () => {
 	gulp.src("./src/**/*.{html,png}" )
 		.pipe( gulp.dest("./build" ) );
 });
@@ -49,12 +43,12 @@ gulp.task("lint:js", () => {
 });
 
 // Transpile es6 code to es5 using Babel and browserify
-gulp.task("transpile", [ "lint:js" ], () => {
-	return browserify( dirs.source + "js/script.js", { debug: true })
-		.transform("babelify", { presets: [ "es2015" ] })
+gulp.task("transpile", () => {
+	browserify( dirs.source + "js/script.js", { debug: true })
+		.transform("babelify", { presets: [ "es2015", "react" ] })
 		.bundle()
 		.on("error", util.log.bind( util, "Browserify Error") )
-		.pipe( source("main.js") )
+		.pipe( source("js/script.js") )
 		.pipe( buffer() )
 		.pipe( sourcemaps.init({ loadMaps: true }) )
 		// .pipe( uglify() )
@@ -64,17 +58,18 @@ gulp.task("transpile", [ "lint:js" ], () => {
 });
 
 // Start a server from buid directory
-gulp.task("serve", [ "build" ],() => {
-	browser({
+gulp.task("serve", () => {
+	browser.init({
 		server: {
-			baseDir: dirs.build
+			baseDir: dirs.build,
+			middleware: [superstatic({stack: 'strict'})]
 		}
 	});
 });
 
 // Convert SASS files to CSS
 gulp.task("sass", () => {
-	return gulp.src( dirs.source + "sass/style.scss")
+	gulp.src( dirs.source + "sass/style.scss")
 		.pipe( sass({
 			style: "compressed"
 		}).on("error", sass.logError ) )
@@ -83,21 +78,30 @@ gulp.task("sass", () => {
 });
 
 // Watch for when JS, HTML, or SCSS files change so they can be updated
-gulp.task("watch", [ "build" ],  () => {
+gulp.task("watch", [ "build" ], () => {
 	gulp.watch( dirs.source + "js/**/*.js", [ "transpile" ]);
 	gulp.watch( dirs.source + "**/*.html", [ "copy-files" ]);
 	gulp.watch( dirs.source + "sass/**/*.scss", [ "sass" ]);
 });
 
-gulp.task("build", [ "clean", "sass", "transpile", "copy-files" ]);
+gulp.task("build", [ "lint:js", 'copy-files', 'transpile', 'sass' ]);
 gulp.task("default", [ "build", "serve", "watch" ]);
 
-gulp.task("test", [ "serve" ], () => {
-	return gulp.src([ dirs.test + "**/*.js" ], { read: false })
+gulp.task("test", [ 'build', 'serve' ], () => {
+	gulp.src([ dirs.test + "**/*.js" ], { read: false })
+		.pipe( mocha({ reporter: "spec" }) )
+		.on("error", util.log )
+		.once('end', () => {
+			browser.exit();
+		});
+});
+
+gulp.task("test-simple", () => {
+	gulp.src([ dirs.test + "**/*.js" ], { read: false })
 		.pipe( mocha({ reporter: "spec" }) )
 		.on("error", util.log );
 });
 
 gulp.task("watch-test", [ "serve" ], () => {
-	gulp.watch([ dirs.test + "**" ], [ "test" ]);
+	gulp.watch([ dirs.test + "**" ], [ "test-simple" ]);
 });
