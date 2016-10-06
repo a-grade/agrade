@@ -58,14 +58,13 @@ gulp.task("transpile", () => {
 });
 
 // Start a server from buid directory
-gulp.task("serve", [ "build" ],() => {
+gulp.task("serve", () => {
 	browser.init({
 		server: {
 			baseDir: dirs.build,
 			middleware: [superstatic({stack: 'strict'})]
 		}
 	});
-	gulp.watch('build/*').on('change', browser.reload);
 });
 
 // Convert SASS files to CSS
@@ -86,14 +85,23 @@ gulp.task("watch", [ "build" ], () => {
 });
 
 gulp.task("build", [ "lint:js", 'copy-files', 'transpile', 'sass' ]);
-gulp.task("default", [ "build" , "serve", "watch" ]);
+gulp.task("default", [ "build", "serve", "watch" ]);
 
-gulp.task("test", [ "serve" ], () => {
-	return gulp.src([ dirs.test + "**/*.js" ], { read: false })
+gulp.task("test", [ 'build', 'serve' ], () => {
+	gulp.src([ dirs.test + "**/*.js" ], { read: false })
+		.pipe( mocha({ reporter: "spec" }) )
+		.on("error", util.log )
+		.once('end', () => {
+			browser.exit();
+		});
+});
+
+gulp.task("test-simple", () => {
+	gulp.src([ dirs.test + "**/*.js" ], { read: false })
 		.pipe( mocha({ reporter: "spec" }) )
 		.on("error", util.log );
 });
 
 gulp.task("watch-test", [ "serve" ], () => {
-	gulp.watch([ dirs.test + "**" ], [ "test" ]);
+	gulp.watch([ dirs.test + "**" ], [ "test-simple" ]);
 });
