@@ -23,4 +23,5 @@ jspm_packages
 .eslintcache
 
 # Scripts files should be .ts
-*.js*
+src/**/*.js*
+test/**/*.js*
