@@ -7,10 +7,10 @@ install:
   - npm install -g firebase-tools
 
 script:
-  - gulp test
+  - npm run test-once
 
 after_success:
-  - gulp build
+  - npm run tsc
   - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "develop" && firebase deploy --token ${FIREBASE_TOKEN}
 
 cache:
