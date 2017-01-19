@@ -1,10 +1,9 @@
 {
-	"name": "agrade",
+	"name": "marmitascassia",
 	"version": "0.0.0",
 	"description": "",
 	"main": " ",
 	"directories": {
-		"documentation": "documentation/",
 		"source": "src/",
 		"test": "test/"
 	},
@@ -14,14 +13,10 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/a-grade/agrade.git"
+		"url": "git+https://github.com/marianayamamoto/marmitascassia.git"
 	},
 	"author": "0tho, murilodag",
 	"license": "UNLICENSED",
-	"bugs": {
-		"url": "https://github.com/a-grade/agrade/issues"
-	},
-	"homepage": "https://github.com/a-grade/agrade#readme",
 	"dependencies": {
 		"@angular/common": "~2.4.0",
 		"@angular/compiler": "~2.4.0",
