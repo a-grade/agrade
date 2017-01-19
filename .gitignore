@@ -1,27 +1,3 @@
-# Logs
-logs
-*.log
-npm-debug.log*
 
-# Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock
-
-# Build folder
-build
-
-# Dependency directories
-node_modules
-jspm_packages
-
-# Optional npm cache directory
-.npm
-
-# Optional eslint cache
-.eslintcache
-
-# Scripts files should be .ts
-src/**/*.js*
-test/**/*.js*
+/dist
+/node_modules
