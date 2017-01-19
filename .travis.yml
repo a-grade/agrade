@@ -1,30 +1,14 @@
 language: node_js
-sudo: required
 node_js:
   - 6
-
-os:
-  - linux
-
-env:
-  global:
-    - DBUS_SESSION_BUS_ADDRESS=/dev/null
-    - DISPLAY=:99.0
-    - CHROME_BIN=chromium-browser
-
-before_script:
-  - sh -e /etc/init.d/xvfb start
 
 install:
   - npm install
   - npm install -g firebase-tools
-
-script:
-  - npm run test-once
+  - npm install -g angular-cli
 
 after_success:
-  - npm run tsc
-  - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "develop" && firebase deploy --token ${FIREBASE_TOKEN}
+  - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "develop" && ng build && firebase deploy --token ${FIREBASE_TOKEN}
 
 cache:
   directories:

@@ -10,6 +10,7 @@
 	},
 	"scripts": {
 		"start": "ng serve",
+		"deploy": "ng build && firebase deploy",
 		"lint": "tslint \"src/**/*.ts\" --project src/tsconfig.json --type-check"
 	},
 	"repository": {
