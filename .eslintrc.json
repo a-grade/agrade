@@ -1,0 +1,29 @@
+{
+	"plguins": [
+		"react"
+	],
+	"extends": [
+		"eslint:recommended"
+	],
+	"parserOptions": {
+		"ecmaVersion": 6,
+		"sourceType": "module",
+		"ecmaFeatures": {
+			"jsx": true
+		}
+	},
+	"env": {
+		"browser": true,
+		"node": true,
+		"mocha": true
+	},
+	"rules": {
+		"curly": "warn",
+		"eqeqeq": "warn",
+		"no-use-before-define": "error",
+		"no-sequences": "error",
+		"no-undefined": "error",
+		"no-unused-vars": "off",
+		"no-console": "warn"
+	}
+}

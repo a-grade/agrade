@@ -1,0 +1,9 @@
+
+<h2>Produtos</h2>
+<ul>
+<li *ngFor="let product of products | async"
+ (click)="onSelect(product)">
+ <span>{{product.name}}</span>
+</li>
+</ul>
+<product-detail [product]="selectedProduct"></product-detail>
