@@ -4,13 +4,13 @@ import { UniversityList } from './university-list.component';
 @Component({
 	selector: 'app-root',
 	template: `
-		<h1>
+		<md-toolbar color="primary">
 			{{title}}
-		</h1>
+		</md-toolbar>
 		<university-list></university-list>
 	`
 })
 
 export class AppComponent {
-  title = 'Bem vindo ao Agrade';
+  title = 'Agrade';
 }
