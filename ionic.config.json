@@ -1,0 +1,10 @@
+{
+  "name": "Agrade",
+  "app_id": "Agrade",
+  "typescript": true,
+  "v2": true,
+	"copyIndexContent": {
+    "src": ["{{SRC}}/index.html", "{{SRC}}/manifest.json"],
+    "dest": "{{WWW}}"
+  }
+}

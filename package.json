@@ -9,8 +9,8 @@
 		"test": "test/"
 	},
 	"scripts": {
-		"start": "ng serve",
-		"deploy": "ng build && firebase deploy",
+		"start": "ionic-app-scripts serve",
+		"deploy": "ionic-app-scripts build && firebase deploy",
 		"single-deploy": "firebase deploy",
 		"lint": "tslint \"src/**/*.ts\" --project src/tsconfig.json --type-check"
 	},
@@ -34,15 +34,20 @@
 		"@angular/platform-browser": "~2.4.0",
 		"@angular/platform-browser-dynamic": "~2.4.0",
 		"@angular/router": "~3.4.0",
+		"@ionic/storage": "1.1.7",
 		"angularfire2": "^2.0.0-beta.7",
 		"core-js": "^2.4.1",
 		"firebase": "^3.6.6",
+		"ionic-angular": "2.0.0",
+		"ionic-native": "2.4.1",
+		"ionicons": "3.0.0",
 		"rxjs": "5.0.1",
 		"ts-helpers": "^1.1.1",
 		"zone.js": "^0.7.4"
 	},
 	"devDependencies": {
 		"@angular/compiler-cli": "^2.3.1",
+		"@ionic/app-scripts": "1.0.0",
 		"@types/node": "^6.0.42",
 		"angular-cli": "^1.0.0-beta.25.5",
 		"codelyzer": "~2.0.0-beta.1",

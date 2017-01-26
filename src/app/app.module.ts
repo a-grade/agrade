@@ -1,12 +1,11 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { MaterialModule } from '@angular/material';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { NgModule, ErrorHandler } from '@angular/core';
+import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { AngularFireModule } from 'angularfire2';
 
-import { UniversityList } from './university-list.component';
-import { AppComponent } from './app.component';
+import { MyApp } from './app.component';
+import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic';
+import { ItemDetailsPage } from '../pages/item-details/item-details';
+import { ListPage } from '../pages/list/list';
 
 export const firebaseConfig = {
 	apiKey: "AIzaSyAlVm4IpLpPtc7vgA2apIRT4n7LgCFkysQ",
@@ -14,21 +13,27 @@ export const firebaseConfig = {
 	databaseURL: "https://agrade-6ce46.firebaseio.com",
 	storageBucket: "agrade-6ce46.appspot.com",
 	messagingSenderId: "516270411915"
- };
+};
+
 
 @NgModule({
 	declarations: [
-		UniversityList,
-		AppComponent
+		MyApp,
+		HelloIonicPage,
+		ItemDetailsPage,
+		ListPage
 	],
 	imports: [
-		MaterialModule.forRoot(),
 		AngularFireModule.initializeApp(firebaseConfig),
-		BrowserModule,
-		FormsModule,
-		HttpModule
+		IonicModule.forRoot(MyApp)
 	],
-	providers: [],
-	bootstrap: [AppComponent]
+	bootstrap: [IonicApp],
+	entryComponents: [
+		MyApp,
+		HelloIonicPage,
+		ItemDetailsPage,
+		ListPage
+	],
+	providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
-export class AppModule { }
+export class AppModule {}
