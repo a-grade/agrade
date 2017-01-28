@@ -3,9 +3,8 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { AngularFireModule } from 'angularfire2';
 
 import { MyApp } from './app.component';
-import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic';
-import { ItemDetailsPage } from '../pages/item-details/item-details';
-import { ListPage } from '../pages/list/list';
+import { UniListPage } from '../pages/uni-list/uni-list';
+import { MajorListPage } from '../pages/major-list/major-list';
 
 export const firebaseConfig = {
 	apiKey: "AIzaSyAlVm4IpLpPtc7vgA2apIRT4n7LgCFkysQ",
@@ -15,13 +14,11 @@ export const firebaseConfig = {
 	messagingSenderId: "516270411915"
 };
 
-
 @NgModule({
 	declarations: [
 		MyApp,
-		HelloIonicPage,
-		ItemDetailsPage,
-		ListPage
+		UniListPage,
+		MajorListPage,
 	],
 	imports: [
 		AngularFireModule.initializeApp(firebaseConfig),
@@ -30,10 +27,14 @@ export const firebaseConfig = {
 	bootstrap: [IonicApp],
 	entryComponents: [
 		MyApp,
-		HelloIonicPage,
-		ItemDetailsPage,
-		ListPage
+		UniListPage,
+		MajorListPage,
 	],
-	providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+	providers: [
+		{
+			provide: ErrorHandler,
+			useClass: IonicErrorHandler
+		}
+	]
 })
 export class AppModule {}

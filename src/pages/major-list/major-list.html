@@ -1,0 +1,46 @@
+<ion-header>
+	<ion-navbar>
+		<button ion-button menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title>Cursos</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+	<ion-list>
+		<button
+				ion-item
+				*ngFor="let major of majors | async"
+				(click)="majorSelected($event, major)">
+			<strong>
+				{{major.shortName}}
+			</strong>
+			<div>
+				{{major.name}}
+			</div>
+		</button>
+		<ion-item
+				text-wrap
+				text-center
+				*ngIf="noMajorsAvailable">
+			<div>
+				Nenhum curso cadastrado para <strong>{{this.selectedUni.name}}</strong>!
+			</div>
+			<div>
+				Tente outra universidade ou contate os desenvolvedores:
+				<a
+						target="_blank"
+						[innerHtml]="'0tho'"
+						href="mailto:marcelolopeslotufo@gmail.com?Subject={{this.selectedUni.name}} sem cursos cadastrados no Agrade">
+				</a>
+				ou
+				<a
+						target="_blank"
+						[innerHtml]="'MuriloDAG'"
+						href="mailto:dag.murilo@gmail.com?Subject={{this.selectedUni.name}} sem cursos cadastrados no Agrade">
+				</a>.
+			</div>
+		</ion-item>
+	</ion-list>
+</ion-content>
