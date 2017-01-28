@@ -6,6 +6,7 @@ import { UniListPage } from '../pages/uni-list/uni-list';
 @Component({
 	templateUrl: 'app.html'
 })
+
 export class MyApp {
 	@ViewChild(Nav) nav: Nav;
 

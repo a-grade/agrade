@@ -3,7 +3,7 @@
 		<button ion-button menuToggle>
 			<ion-icon name="menu"></ion-icon>
 		</button>
-		<ion-title>Universidades</ion-title>
+		<ion-title>Matérias</ion-title>
 	</ion-navbar>
 </ion-header>
 
@@ -11,13 +11,13 @@
 	<ion-list>
 		<button
 				ion-item
-				*ngFor="let uni of unis"
+				*ngFor="let unit of units"
 				(click)="uniSelected(uni)">
 			<strong>
-				{{uni.shortName}}
+				{{unit.name}}
 			</strong>
 			<div>
-				{{uni.name}}
+				{{unit.period}}
 			</div>
 		</button>
 	</ion-list>

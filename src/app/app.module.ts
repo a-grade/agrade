@@ -2,9 +2,13 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { AngularFireModule } from 'angularfire2';
 
+import { DatabaseService } from '../services/database-service';
+import { StateService } from '../services/state-service';
+
 import { MyApp } from './app.component';
 import { UniListPage } from '../pages/uni-list/uni-list';
 import { MajorListPage } from '../pages/major-list/major-list';
+import { UnitListPage } from '../pages/unit-list/unit-list';
 
 export const firebaseConfig = {
 	apiKey: "AIzaSyAlVm4IpLpPtc7vgA2apIRT4n7LgCFkysQ",
@@ -19,6 +23,7 @@ export const firebaseConfig = {
 		MyApp,
 		UniListPage,
 		MajorListPage,
+		UnitListPage,
 	],
 	imports: [
 		AngularFireModule.initializeApp(firebaseConfig),
@@ -29,8 +34,11 @@ export const firebaseConfig = {
 		MyApp,
 		UniListPage,
 		MajorListPage,
+		UnitListPage,
 	],
 	providers: [
+		DatabaseService,
+		StateService,
 		{
 			provide: ErrorHandler,
 			useClass: IonicErrorHandler

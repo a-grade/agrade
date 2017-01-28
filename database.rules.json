@@ -5,6 +5,12 @@
 		"universities": {
 			".read": true
 		},
+		"majors": {
+			".read": true
+		},
+		"units": {
+			".read": true
+		},
 		"users": {
 			".read": "false",
 			".write": "false",

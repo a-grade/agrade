@@ -1,5 +1,5 @@
 
-export class Uni {
+export class Major {
 	$key: string;
 	name: string;
 	shortName: string;

@@ -11,8 +11,8 @@
 	<ion-list>
 		<button
 				ion-item
-				*ngFor="let major of majors | async"
-				(click)="majorSelected($event, major)">
+				*ngFor="let major of majors"
+				(click)="majorSelected(major)">
 			<strong>
 				{{major.shortName}}
 			</strong>
@@ -27,6 +27,7 @@
 			<div>
 				Nenhum curso cadastrado para <strong>{{this.selectedUni.name}}</strong>!
 			</div>
+			<br />
 			<div>
 				Tente outra universidade ou contate os desenvolvedores:
 				<a
