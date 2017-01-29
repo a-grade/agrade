@@ -20,31 +20,44 @@ export class MajorListPage {
 
 	constructor(private dbService: DatabaseService, private stateService: StateService, public navCtrl: NavController, public navParams: NavParams) {
 		console.debug("major-list:constructor()");
+	}
+
+	ionViewWillEnter() {
+		console.debug("major-list:ionViewWillEnter()");
 
 		// If we navigated to this page, we will have an uni available as a nav param
-		this.selectedUni = navParams.get('uni');
-		console.debug("major-list:constructor() - uni", this.selectedUni);
+		this.selectedUni = this.navParams.get('uni');
+		console.debug("major-list:ionViewWillEnter() - uni", this.selectedUni);
 
-		const previouslySelectedMajor = stateService.getCurrentMajor();
-		console.debug('major-list:constructor() - old major', previouslySelectedMajor);
+		const previouslySelectedMajor = this.stateService.getCurrentMajor();
+		console.debug('major-list:ionViewWillEnter() - old major', previouslySelectedMajor);
 
 		if (previouslySelectedMajor) {
-			console.debug('major-list:constructor() - show units for saved major');
+			console.debug('major-list:ionViewWillEnter() - show units for saved major');
 			this.majorSelected(previouslySelectedMajor);
 		} else {
-			console.debug('uni-list:constructor() - get majors from server');
-			dbService.getMajors(this.selectedUni).subscribe(majors => {
-				this.majors = majors;
-				console.debug("major-list:constructor() - majors", this.majors);
+			// prevent reloading data from firebase
+			if (!this.majors) {
+				console.debug('major-list:ionViewWillEnter() - get majors from server');
+				this.dbService.getMajors(this.selectedUni).subscribe(majors => {
+					this.majors = majors;
+					console.debug("major-list:ionViewWillEnter() - majors", this.majors);
 
-				this.noMajorsAvailable = majors.length <= 0;
-				console.debug("major-list:constructor() - noMajorsAvailable", this.noMajorsAvailable);
-			});
+					this.noMajorsAvailable = majors.length <= 0;
+					console.debug("major-list:ionViewWillEnter() - noMajorsAvailable", this.noMajorsAvailable);
+				});
+			}
 		}
+	};
+
+	backToUniList() {
+		console.log('major-list:backToUniList()');
+		this.stateService.setCurrentUni(null);
 	}
 
 	majorSelected(major) {
 		console.debug('major-list:majorSelected()', major);
+		this.stateService.setCurrentMajor(major);
 		this.navCtrl.push(UnitListPage, {
 			uni: this.selectedUni,
 			major: major,

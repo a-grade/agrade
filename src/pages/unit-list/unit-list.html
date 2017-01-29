@@ -1,8 +1,10 @@
 <ion-header>
-	<ion-navbar>
-		<button ion-button menuToggle>
-			<ion-icon name="menu"></ion-icon>
-		</button>
+	<ion-navbar hideBackButton>
+		<ion-buttons left>
+			<button ion-button navPop icon-only (click)="backToMajorList()">
+				<ion-icon name="arrow-back"></ion-icon>
+			</button>
+		</ion-buttons>
 		<ion-title>Matérias</ion-title>
 	</ion-navbar>
 </ion-header>
@@ -20,5 +22,28 @@
 				{{unit.period}}
 			</div>
 		</button>
+		<ion-item
+				text-wrap
+				text-center
+				*ngIf="noUnitsAvailable">
+			<div>
+				Nenhuma matéria cadastrada para <strong>{{this.selectedMajor.name}}</strong> na <strong>{{this.selectedUni.name}}</strong>!
+			</div>
+			<br />
+			<div>
+				Tente outro curso ou contate os desenvolvedores:
+				<a
+						target="_blank"
+						[innerHtml]="'0tho'"
+						href="mailto:marcelolopeslotufo@gmail.com?Subject={{this.selectedMajor.name}} na {{this.selectedUni.name}} sem matérias cadastradas no Agrade">
+				</a>
+				ou
+				<a
+						target="_blank"
+						[innerHtml]="'MuriloDAG'"
+						href="mailto:dag.murilo@gmail.com?Subject={{this.selectedMajor.name}} na {{this.selectedUni.name}} sem matérias cadastradas no Agrade">
+				</a>.
+			</div>
+		</ion-item>
 	</ion-list>
 </ion-content>

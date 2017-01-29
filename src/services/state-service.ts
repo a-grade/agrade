@@ -12,21 +12,27 @@ export class StateService {
 
 	setCurrentUni(uni: Uni): void {
 		console.debug('state-service:setCurrentUni(): uni', uni);
-		// TODO save this to the cookie
+		localStorage.setItem('selectedUni', JSON.stringify(uni));
 	};
 	getCurrentUni(): Uni {
-		console.debug('state-service:getCurrentUni(): currently this is mocked as ufscar');
-		// TODO add scenario when it is first time of the user
-		return new Uni('ufscar', 'Universidade Federal de São Carlos', 'UFSCar');
+		console.debug('state-service:getCurrentUni()');
+
+		const currentUni = JSON.parse(localStorage.getItem('selectedUni'));
+		console.debug('state-service:getCurrentUni() - retrieved uni', currentUni);
+
+		return currentUni;
 	};
 
 	setCurrentMajor(major: Major): void {
 		console.debug('state-service:setCurrentMajor(): major', major);
-		// TODO save this to the cookie
+		localStorage.setItem('selectedMajor', JSON.stringify(major));
 	};
 	getCurrentMajor(): Major {
 		console.debug('state-service:getCurrentMajor()');
-		// TODO add scenario when it is first time of the user
-		return new Major('bcc', 'Bacharelado em Ciência da Computação', 'BCC');
+
+		const currentMajor = JSON.parse(localStorage.getItem('selectedMajor'));
+		console.debug('state-service:getCurrentMajor() - retrieved major', currentMajor);
+
+		return currentMajor;
 	};
 }

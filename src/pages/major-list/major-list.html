@@ -1,8 +1,10 @@
 <ion-header>
-	<ion-navbar>
-		<button ion-button menuToggle>
-			<ion-icon name="menu"></ion-icon>
-		</button>
+	<ion-navbar hideBackButton>
+		<ion-buttons left>
+			<button ion-button navPop icon-only (click)="backToUniList()">
+				<ion-icon name="arrow-back"></ion-icon>
+			</button>
+		</ion-buttons>
 		<ion-title>Cursos</ion-title>
 	</ion-navbar>
 </ion-header>

@@ -17,23 +17,31 @@ export class UniListPage {
 
 	constructor(private dbService: DatabaseService, private stateService: StateService, public navCtrl: NavController, public navParams: NavParams) {
 		console.debug('uni-list:constructor()');
+	}
 
-		const previouslySelectedUni = stateService.getCurrentUni();
-		console.debug('uni-list:constructor() - old uni', previouslySelectedUni);
+	ionViewWillEnter() {
+		console.debug('uni-list:ionViewWillEnter()');
+
+		const previouslySelectedUni = this.stateService.getCurrentUni();
+		console.debug('uni-list:ionViewWillEnter() - old uni', previouslySelectedUni);
 
 		if (previouslySelectedUni) {
-			console.debug('uni-list:constructor() - show majors for saved uni');
+			console.debug('uni-list:ionViewWillEnter() - show majors for saved uni');
 			this.uniSelected(previouslySelectedUni);
 		} else {
-			console.debug('uni-list:constructor() - get unis from server');
-			dbService.getUnis().subscribe(
-				unis => this.unis = unis
-			);
+			// prevent reloading data from firebase
+			if (!this.unis) {
+				console.debug('uni-list:ionViewWillEnter() - get unis from server');
+				this.dbService.getUnis().subscribe(
+					unis => this.unis = unis
+				);
+			}
 		}
 	}
 
 	uniSelected(uni) {
 		console.debug('uni-list:uniSelected()', uni);
+		this.stateService.setCurrentUni(uni);
 		this.navCtrl.push(MajorListPage, {
 			uni: uni,
 		});
