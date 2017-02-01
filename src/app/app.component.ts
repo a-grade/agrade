@@ -1,6 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { Platform, MenuController, Nav } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
+
+import { LogAspect } from '../services/log-service';
+
 import { UniListPage } from '../pages/uni-list/uni-list';
 
 @Component({
@@ -14,7 +17,7 @@ export class MyApp {
 	rootPage: any = UniListPage;
 	pages: Array<{title: string, component: any}>;
 
-	constructor(public platform: Platform, public menu: MenuController) {
+	constructor(public platform: Platform, public menu: MenuController, private logAspect: LogAspect) {
 		this.initializeApp();
 
 		// set our app's pages

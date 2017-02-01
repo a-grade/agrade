@@ -19,7 +19,7 @@ export class UnitListPage {
 	noUnitsAvailable: boolean = false;
 	units: Unit[];
 
-	constructor(private dbService: DatabaseService, private stateService: StateService, public navCtrl: NavController, public navParams: NavParams) {
+	constructor(private dbService: DatabaseService, private stateService: StateService, private navCtrl: NavController, private navParams: NavParams) {
 		console.debug('unit-list:constructor()');
 
 		// If we navigated to this page, we will have an uni and major available as a nav param

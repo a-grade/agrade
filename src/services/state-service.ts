@@ -1,38 +1,31 @@
 import { Injectable } from '@angular/core';
+import { Wove } from 'aspect.js';
 
 import { Uni } from '../models/uni';
 import { Major } from '../models/major';
 
+@Wove({ debug: true })
 @Injectable()
 export class StateService {
 
-	constructor() {
-		console.debug('state-service:init()');
+	private saveObject(key: string, value: any): void {
+		localStorage.setItem('selectedUni', JSON.stringify(value));
 	};
+	private getObject(key: string) {
+		return JSON.parse(localStorage.getItem(key));
+	}
 
 	setCurrentUni(uni: Uni): void {
-		console.debug('state-service:setCurrentUni(): uni', uni);
-		localStorage.setItem('selectedUni', JSON.stringify(uni));
+		this.saveObject('selectedUni', uni);
 	};
 	getCurrentUni(): Uni {
-		console.debug('state-service:getCurrentUni()');
-
-		const currentUni = JSON.parse(localStorage.getItem('selectedUni'));
-		console.debug('state-service:getCurrentUni() - retrieved uni', currentUni);
-
-		return currentUni;
+		return this.getObject('selectedUni');
 	};
 
 	setCurrentMajor(major: Major): void {
-		console.debug('state-service:setCurrentMajor(): major', major);
-		localStorage.setItem('selectedMajor', JSON.stringify(major));
+		this.saveObject('selectedMajor', major);
 	};
 	getCurrentMajor(): Major {
-		console.debug('state-service:getCurrentMajor()');
-
-		const currentMajor = JSON.parse(localStorage.getItem('selectedMajor'));
-		console.debug('state-service:getCurrentMajor() - retrieved major', currentMajor);
-
-		return currentMajor;
+		return this.getObject('selectedMajor');
 	};
 }

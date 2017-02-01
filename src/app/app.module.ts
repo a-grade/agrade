@@ -2,6 +2,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { AngularFireModule } from 'angularfire2';
 
+import { LogAspect } from '../services/log-service';
 import { DatabaseService } from '../services/database-service';
 import { StateService } from '../services/state-service';
 
@@ -37,6 +38,7 @@ export const firebaseConfig = {
 		UnitListPage,
 	],
 	providers: [
+		LogAspect,
 		DatabaseService,
 		StateService,
 		{
