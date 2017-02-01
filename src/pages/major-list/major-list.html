@@ -25,7 +25,7 @@
 		<ion-item
 				text-wrap
 				text-center
-				*ngIf="noMajorsAvailable">
+				*ngIf="!loading && majors.length === 0">
 			<div>
 				Nenhum curso cadastrado para <strong>{{this.selectedUni.name}}</strong>!
 			</div>
@@ -46,4 +46,8 @@
 			</div>
 		</ion-item>
 	</ion-list>
+
+	<div text-center>
+		<ion-spinner *ngIf="loading" name="bubbles"></ion-spinner>
+	</div>
 </ion-content>
