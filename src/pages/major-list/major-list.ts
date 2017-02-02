@@ -20,8 +20,7 @@ export class MajorListPage {
 		return this.navParams.get('uni');
 	};
 
-	loading: boolean = true;
-	majors: Major[] = [];
+	majors: Major[];
 
 	constructor(
 		private dbService: DatabaseService,
@@ -38,7 +37,6 @@ export class MajorListPage {
 		} else {
 			this.dbService.getMajors(this.selectedUni).subscribe(majors => {
 				this.majors = majors;
-				this.loading = false
 			});
 		}
 	};

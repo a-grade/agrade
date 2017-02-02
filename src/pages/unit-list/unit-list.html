@@ -25,7 +25,7 @@
 		<ion-item
 				text-wrap
 				text-center
-				*ngIf="noUnitsAvailable">
+				*ngIf="units && units.length === 0">
 			<div>
 				Nenhuma matéria cadastrada para <strong>{{this.selectedMajor.name}}</strong> na <strong>{{this.selectedUni.name}}</strong>!
 			</div>
@@ -46,4 +46,8 @@
 			</div>
 		</ion-item>
 	</ion-list>
+
+	<div text-center>
+		<ion-spinner *ngIf="!units" name="bubbles"></ion-spinner>
+	</div>
 </ion-content>
