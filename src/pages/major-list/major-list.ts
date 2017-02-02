@@ -10,7 +10,7 @@ import { Major } from '../../models/major';
 import { DatabaseService } from '../../services/database-service';
 import { StateService } from '../../services/state-service';
 
-@Wove({ debug: true })
+@Wove()
 @Component({
 	selector: 'major-list',
 	templateUrl: 'major-list.html'

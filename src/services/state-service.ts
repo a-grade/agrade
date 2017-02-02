@@ -4,7 +4,7 @@ import { Wove } from 'aspect.js';
 import { Uni } from '../models/uni';
 import { Major } from '../models/major';
 
-@Wove({ debug: true })
+@Wove()
 @Injectable()
 export class StateService {
 

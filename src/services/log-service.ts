@@ -4,15 +4,33 @@ import {beforeMethod, afterMethod, beforeStaticMethod, afterStaticMethod, before
 @Injectable()
 export class LogAspect {
 
+	get loggingOn(): boolean {
+		return true;
+	};
+	shouldLog(woveMetadata = { logOff: false }): boolean {
+		return (this.loggingOn && (woveMetadata && !woveMetadata.logOff));
+	};
+	logAtLevel(woveMetadata = { level: 'debug' }): any {
+		return console[woveMetadata.level ? woveMetadata.level : 'debug'];
+	};
+
+
 	before(meta: Metadata): void {
-		if (meta.woveMetadata.debug) {
-			console.log(`${meta.className}.${meta.method.name}() - called with`, ...meta.method.args);
+		if (this.shouldLog(meta.woveMetadata)) {
+			this.logAtLevel(meta.woveMetadata)(
+				`${meta.className}.${meta.method.name}() called ${meta.method.args.length ? 'with:' : '' }`,
+				...meta.method.args,
+			);
 		}
 	}
 	after(meta: Metadata): void {
-		if (meta.woveMetadata.debug) {
-			console.log(`${meta.className}.${meta.method.name}() - resulted in`, meta.method.result);
+		if (this.shouldLog(meta.woveMetadata)) {
+			this.logAtLevel(meta.woveMetadata)(
+				`${meta.className}.${meta.method.name}() returned ${meta.method.result ? 'with:' : '' }`,
+				meta.method.result ? meta.method.result : '',
+			);
 		}
+
 	}
 
 	@beforeMethod({ classNamePattern: /.*/, methodNamePattern: /.*/ })

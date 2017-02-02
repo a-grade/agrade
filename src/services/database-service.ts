@@ -6,7 +6,7 @@ import { Uni } from '../models/uni';
 import { Major } from '../models/major';
 import { Unit } from '../models/unit';
 
-@Wove({ debug: true })
+@Wove()
 @Injectable()
 export class DatabaseService {
 

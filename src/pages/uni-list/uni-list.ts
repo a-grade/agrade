@@ -8,7 +8,7 @@ import { Uni } from '../../models/uni';
 import { DatabaseService } from '../../services/database-service';
 import { StateService } from '../../services/state-service';
 
-@Wove({ debug: true })
+@Wove({ level: 'log', logOff: true })
 @Component({
 	selector: 'uni-list',
 	templateUrl: 'uni-list.html'
