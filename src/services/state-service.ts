@@ -9,7 +9,7 @@ import { Major } from '../models/major';
 export class StateService {
 
 	private saveObject(key: string, value: any): void {
-		localStorage.setItem('selectedUni', JSON.stringify(value));
+		localStorage.setItem(key, JSON.stringify(value));
 	};
 	private getObject(key: string) {
 		return JSON.parse(localStorage.getItem(key));
