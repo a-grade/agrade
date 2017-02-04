@@ -24,17 +24,26 @@ export class UnitListPage {
 	};
 	units: Unit[];
 
-	constructor(private dbService: DatabaseService, private stateService: StateService, private navCtrl: NavController, private navParams: NavParams) {
-		console.debug('unit-list:constructor() - get units from server');
-		dbService.getUnits(this.selectedUni, this.selectedMajor).subscribe(units => {
-			this.units = units;
-		});
+	constructor(
+		private dbService: DatabaseService,
+		private stateService: StateService,
+		private navCtrl: NavController,
+		private navParams: NavParams,
+	) {
+		dbService
+			.getUnits(this.selectedUni, this.selectedMajor)
+			.subscribe(units => this.units = units );
 	}
 
 	backToMajorList() {
 		this.stateService.setCurrentMajor(null);
 	}
 
+	unitLocked(unit) {
+		return true;
+	}
+
 	unitSelected(unit) {
+		this.units.forEach(unit => {});
 	}
 }
