@@ -8,7 +8,9 @@ import { StateService } from '../services/state-service';
 
 import { MyApp } from './app.component';
 import { UniListPage } from '../pages/uni-list/uni-list';
+import { UniDetailsPage } from '../pages/uni-details/uni-details';
 import { MajorListPage } from '../pages/major-list/major-list';
+import { MajorDetailsPage } from '../pages/major-details/major-details';
 import { UnitListPage } from '../pages/unit-list/unit-list';
 
 export const firebaseConfig = {
@@ -23,7 +25,9 @@ export const firebaseConfig = {
 	declarations: [
 		MyApp,
 		UniListPage,
+		UniDetailsPage,
 		MajorListPage,
+		MajorDetailsPage,
 		UnitListPage,
 	],
 	imports: [
@@ -34,7 +38,9 @@ export const firebaseConfig = {
 	entryComponents: [
 		MyApp,
 		UniListPage,
+		UniDetailsPage,
 		MajorListPage,
+		MajorDetailsPage,
 		UnitListPage,
 	],
 	providers: [

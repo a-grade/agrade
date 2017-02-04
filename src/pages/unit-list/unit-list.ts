@@ -6,6 +6,8 @@ import { Uni } from '../../models/uni';
 import { Major } from '../../models/major';
 import { Unit } from '../../models/unit';
 
+import { MajorDetailsPage } from '../major-details/major-details'
+
 import { DatabaseService } from '../../services/database-service';
 import { StateService } from '../../services/state-service';
 
@@ -37,6 +39,12 @@ export class UnitListPage {
 
 	backToMajorList() {
 		this.stateService.setCurrentMajor(null);
+	}
+
+	goToMajorDetails() {
+		this.navCtrl.push(MajorDetailsPage, {
+			major : this.selectedMajor
+		});
 	}
 
 	unitLocked(unit) {
