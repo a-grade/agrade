@@ -5,7 +5,8 @@
 				<ion-icon name="arrow-back"></ion-icon>
 			</button>
 		</ion-buttons>
-		<ion-title>Cursos</ion-title>
+		<ion-title *ngIf="!majors">Agrade</ion-title>
+		<ion-title *ngIf="majors">Cursos</ion-title>
 	</ion-navbar>
 </ion-header>
 

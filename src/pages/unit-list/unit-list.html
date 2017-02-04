@@ -5,7 +5,8 @@
 				<ion-icon name="arrow-back"></ion-icon>
 			</button>
 		</ion-buttons>
-		<ion-title>Matérias</ion-title>
+		<ion-title *ngIf="!units">Agrade</ion-title>
+		<ion-title *ngIf="units">Matérias</ion-title>
 	</ion-navbar>
 </ion-header>
 
@@ -13,14 +14,14 @@
 	<ion-list>
 		<button
 				ion-item
+				[class.item-md-dark]="unitLocked(unit)"
 				*ngFor="let unit of units"
 				(click)="unitSelected(unit)">
 			<strong>
 				{{unit.name}}
 			</strong>
-			<div>
-				{{unit.period}}
-			</div>
+			<div>Semestre: {{unit.tags}}</div>
+			<div>Créditos: {{unit.value}}</div>
 		</button>
 		<ion-item
 				text-wrap

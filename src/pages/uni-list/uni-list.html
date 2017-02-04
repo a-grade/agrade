@@ -1,6 +1,7 @@
 <ion-header>
 	<ion-navbar>
-		<ion-title>Universidades</ion-title>
+		<ion-title *ngIf="!unis">Agrade</ion-title>
+		<ion-title *ngIf="unis">Universidades</ion-title>
 	</ion-navbar>
 </ion-header>
 
