@@ -14,7 +14,6 @@ import { StateService } from '../../services/state-service';
 	templateUrl: 'uni-list.html'
 })
 export class UniListPage {
-	loading: boolean = true;
 	unis: Uni[];
 
 	constructor(
@@ -32,7 +31,6 @@ export class UniListPage {
 		} else {
 			this.dbService.getUnis().subscribe(unis => {
 				this.unis = unis
-				this.loading = false;
 			});
 		}
 	};
