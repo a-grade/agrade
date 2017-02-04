@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Wove } from 'aspect.js';
 
 import { UnitListPage } from '../unit-list/unit-list';
+import { UniDetailsPage } from '../uni-details/uni-details';
 
 import { Uni } from '../../models/uni';
 import { Major } from '../../models/major';
@@ -43,6 +44,12 @@ export class MajorListPage {
 
 	backToUniList() {
 		this.stateService.setCurrentUni(null);
+	};
+
+	goToUniDetails() {
+		this.navCtrl.push(UniDetailsPage, {
+			uni : this.selectedUni
+		});
 	};
 
 	majorSelected(major) {
