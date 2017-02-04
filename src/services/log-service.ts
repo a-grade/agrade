@@ -13,24 +13,25 @@ export class LogAspect {
 	logAtLevel(woveMetadata = { level: 'debug' }): any {
 		return console[woveMetadata.level ? woveMetadata.level : 'debug'];
 	};
-
-
-	before(meta: Metadata): void {
+	logWith(meta: Metadata, first: any, second: any[]) {
 		if (this.shouldLog(meta.woveMetadata)) {
-			this.logAtLevel(meta.woveMetadata)(
-				`${meta.className}.${meta.method.name}() called ${meta.method.args.length ? 'with:' : '' }`,
-				...meta.method.args,
-			);
+			this.logAtLevel(meta.woveMetadata)(first, ...second);
 		}
 	}
-	after(meta: Metadata): void {
-		if (this.shouldLog(meta.woveMetadata)) {
-			this.logAtLevel(meta.woveMetadata)(
-				`${meta.className}.${meta.method.name}() returned ${meta.method.result ? 'with:' : '' }`,
-				meta.method.result ? meta.method.result : '',
-			);
-		}
 
+	before(meta: Metadata): void {
+		this.logWith(
+			meta,
+			`${meta.className}.${meta.method.name}() called ${meta.method.args.length ? 'with:' : '' }`,
+			meta.method.args,
+		);
+	}
+	after(meta: Metadata): void {
+		this.logWith(
+			meta,
+			`${meta.className}.${meta.method.name}() returned ${meta.method.result ? 'with:' : '' }`,
+			meta.method.result ? meta.method.result : '',
+		);
 	}
 
 	@beforeMethod({ classNamePattern: /.*/, methodNamePattern: /.*/ })
