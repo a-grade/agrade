@@ -17,17 +17,20 @@
 
 <ion-content>
 	<ion-list>
-		<button
-				ion-item
-				[class.item-md-dark]="unitLocked(unit)"
-				*ngFor="let unit of units"
-				(click)="unitSelected(unit)">
-			<strong>
-				{{unit.name}}
-			</strong>
-			<div>Semestre: {{unit.tags}}</div>
-			<div>Créditos: {{unit.value}}</div>
-		</button>
+		<!-- <ion-item
+			item-checkbox
+			*ngFor="let unit of units"
+			class="item-checkbox"
+			ng-model="unit.checked">
+			{{unit.name}}
+		</ion-item> -->
+		<ion-item *ngFor="let unit of units" detail-push>
+      <ion-checkbox dark [checked]="unit.checked" item-left></ion-checkbox>
+      <ion-label>{{ unit.name }}</ion-label>
+      <span item-right>
+        <ion-icon name="information-circle"></ion-icon>
+      </span>
+    </ion-item>
 		<ion-item
 				text-wrap
 				text-center

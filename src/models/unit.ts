@@ -6,4 +6,5 @@ export class Unit {
 	condition: string;
 	tags: string[];
 	value: number;
+	checked: boolean;
 }

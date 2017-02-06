@@ -48,10 +48,14 @@ export class UnitListPage {
 	}
 
 	unitLocked(unit) {
-		return true;
+		return unit.checked;
 	}
 
 	unitSelected(unit) {
 		this.units.forEach(unit => {});
+	}
+
+	unitToggleCheck(unit) {
+		unit.checked = !unit.checked;
 	}
 }
