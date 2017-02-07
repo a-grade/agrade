@@ -7,8 +7,7 @@ import { UniDetailsPage } from '../uni-details/uni-details';
 
 import { Uni, Major } from '../../models';
 
-import { DatabaseService } from '../../services/database-service';
-import { StateService } from '../../services/state-service';
+import { DatabaseService, StateService } from '../../services';
 
 @Wove()
 @Component({

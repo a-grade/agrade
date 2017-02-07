@@ -5,8 +5,7 @@ import { Wove } from 'aspect.js';
 import { MajorListPage } from '../major-list/major-list';
 import { Uni } from '../../models';
 
-import { DatabaseService } from '../../services/database-service';
-import { StateService } from '../../services/state-service';
+import { DatabaseService, StateService } from '../../services';
 
 @Wove({ level: 'log', logOff: true })
 @Component({

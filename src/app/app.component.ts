@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Platform, MenuController, Nav } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
-import { LogAspect } from '../services/log-service';
+import { LogAspect } from '../services';
 
 import { UniListPage } from '../pages/uni-list/uni-list';
 

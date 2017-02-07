@@ -4,8 +4,7 @@ import { Wove } from 'aspect.js';
 
 import { Major } from '../../models';
 
-import { DatabaseService } from '../../services/database-service';
-import { StateService } from '../../services/state-service';
+import { DatabaseService, StateService } from '../../services';
 
 @Wove({ level: 'log', logOff: true })
 @Component({
