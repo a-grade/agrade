@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Wove } from 'aspect.js';
 
-import { Uni } from '../../models/uni';
+import { Uni } from '../../models';
 
 import { DatabaseService } from '../../services/database-service';
 import { StateService } from '../../services/state-service';

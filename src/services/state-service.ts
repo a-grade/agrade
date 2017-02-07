@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Wove } from 'aspect.js';
 
-import { Uni } from '../models/uni';
-import { Major } from '../models/major';
+import { Uni, Major } from '../models';
 
 @Wove()
 @Injectable()

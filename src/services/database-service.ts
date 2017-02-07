@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { Wove } from 'aspect.js';
 
-import { Uni } from '../models/uni';
-import { Major } from '../models/major';
-import { Unit } from '../models/unit';
+import { Uni, Major, Unit } from '../models';
 
 @Wove()
 @Injectable()
