@@ -5,8 +5,8 @@
 				<ion-icon name="arrow-back"></ion-icon>
 			</button>
 		</ion-buttons>
-		<ion-title *ngIf="!units">Agrade</ion-title>
-		<ion-title *ngIf="units">{{selectedMajor.shortName}} - Matérias</ion-title>
+		<ion-title *ngIf="!modules">Agrade</ion-title>
+		<ion-title *ngIf="modules">{{selectedMajor.shortName}} - Matérias</ion-title>
 		<ion-buttons right>
 			<button ion-button icon-only (click)="goToMajorDetails()">
 				<ion-icon name="information-circle"></ion-icon>
@@ -19,14 +19,14 @@
 	<ion-list>
 		<!-- <ion-item
 			item-checkbox
-			*ngFor="let unit of units"
+			*ngFor="let module of modules"
 			class="item-checkbox"
-			ng-model="unit.checked">
-			{{unit.name}}
+			ng-model="module.checked">
+			{{module.name}}
 		</ion-item> -->
-		<ion-item *ngFor="let unit of units" detail-push>
-			<ion-checkbox dark [checked]="unit.checked" item-left></ion-checkbox>
-			<ion-label>{{ unit.name }}</ion-label>
+		<ion-item *ngFor="let module of modules" detail-push>
+			<ion-checkbox dark [checked]="module.checked" item-left></ion-checkbox>
+			<ion-label>{{ module.name }}</ion-label>
 			<span item-right>
 				<ion-icon name="information-circle"></ion-icon>
 			</span>
@@ -34,7 +34,7 @@
 		<ion-item
 				text-wrap
 				text-center
-				*ngIf="units && units.length === 0">
+				*ngIf="modules && modules.length === 0">
 			<div>
 				Nenhuma matéria cadastrada para <strong>{{this.selectedMajor.name}}</strong> na <strong>{{this.selectedUni.name}}</strong>!
 			</div>
@@ -57,6 +57,6 @@
 	</ion-list>
 
 	<div text-center>
-		<ion-spinner *ngIf="!units" name="bubbles"></ion-spinner>
+		<ion-spinner *ngIf="!modules" name="bubbles"></ion-spinner>
 	</div>
 </ion-content>

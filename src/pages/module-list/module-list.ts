@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Wove } from 'aspect.js';
 
-import { Uni, Major, Unit } from '../../models';
+import { Uni, Major, Module } from '../../models';
 
 import { MajorDetailsPage } from '../../pages'
 
@@ -10,18 +10,18 @@ import { DatabaseService, StateService } from '../../services';
 
 @Wove()
 @Component({
-	selector: 'unit-list',
-	templateUrl: 'unit-list.html'
+	selector: 'module-list',
+	templateUrl: 'module-list.html'
 })
 
-export class UnitListPage {
+export class ModuleListPage {
 	get selectedUni(): Uni {
 		return this.navParams.get('uni');
 	};
 	get selectedMajor(): Major {
 		return this.navParams.get('major');
 	};
-	units: Unit[];
+	modules: Module[];
 
 	constructor(
 		private dbService: DatabaseService,
@@ -30,8 +30,8 @@ export class UnitListPage {
 		private navParams: NavParams,
 	) {
 		dbService
-			.getUnits(this.selectedUni, this.selectedMajor)
-			.subscribe(units => this.units = units );
+			.getModules(this.selectedUni, this.selectedMajor)
+			.subscribe(modules => this.modules = modules );
 	}
 
 	backToMajorList() {
@@ -44,15 +44,15 @@ export class UnitListPage {
 		});
 	}
 
-	unitLocked(unit) {
-		return unit.checked;
+	moduleLocked(module) {
+		return module.checked;
 	}
 
-	unitSelected(unit) {
-		this.units.forEach(unit => {});
+	moduleSelected(module) {
+		this.modules.forEach(module => {});
 	}
 
-	unitToggleCheck(unit) {
-		unit.checked = !unit.checked;
+	moduleToggleCheck(module) {
+		module.checked = !module.checked;
 	}
 }

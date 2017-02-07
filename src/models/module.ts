@@ -1,5 +1,5 @@
 
-export class Unit {
+export class Module {
 	$key: string;
 	name: string;
 	type: string;

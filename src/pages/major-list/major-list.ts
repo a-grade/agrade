@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Wove } from 'aspect.js';
 
-import { UnitListPage, UniDetailsPage } from '../../pages';
+import { ModuleListPage, UniDetailsPage } from '../../pages';
 
 import { Uni, Major } from '../../models';
 
@@ -51,7 +51,7 @@ export class MajorListPage {
 
 	majorSelected(major) {
 		this.stateService.setCurrentMajor(major);
-		this.navCtrl.push(UnitListPage, {
+		this.navCtrl.push(ModuleListPage, {
 			uni: this.selectedUni,
 			major: major,
 		});

@@ -8,7 +8,7 @@
 		"majors": {
 			".read": true
 		},
-		"units": {
+		"modules": {
 			".read": true
 		},
 		"users": {
