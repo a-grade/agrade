@@ -4,7 +4,7 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { LogAspect } from '../services';
 
-import { UniListPage } from '../pages/uni-list/uni-list';
+import { UniListPage } from '../pages';
 
 @Component({
 	templateUrl: 'app.html'

@@ -4,7 +4,7 @@ import { Wove } from 'aspect.js';
 
 import { Uni, Major, Unit } from '../../models';
 
-import { MajorDetailsPage } from '../major-details/major-details'
+import { MajorDetailsPage } from '../../pages'
 
 import { DatabaseService, StateService } from '../../services';
 

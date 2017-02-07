@@ -5,11 +5,7 @@ import { AngularFireModule } from 'angularfire2';
 import { DatabaseService, LogAspect, StateService } from '../services';
 
 import { MyApp } from './app.component';
-import { UniListPage } from '../pages/uni-list/uni-list';
-import { UniDetailsPage } from '../pages/uni-details/uni-details';
-import { MajorListPage } from '../pages/major-list/major-list';
-import { MajorDetailsPage } from '../pages/major-details/major-details';
-import { UnitListPage } from '../pages/unit-list/unit-list';
+import { UniListPage, UniDetailsPage, MajorListPage, MajorDetailsPage, UnitListPage } from '../pages';
 
 export const firebaseConfig = {
 	apiKey: "AIzaSyAlVm4IpLpPtc7vgA2apIRT4n7LgCFkysQ",
