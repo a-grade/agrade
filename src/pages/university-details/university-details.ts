@@ -2,18 +2,18 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Wove } from 'aspect.js';
 
-import { Uni } from '../../models';
+import { University } from '../../models';
 
 import { DatabaseService, StateService } from '../../services';
 
 @Wove({ level: 'log', logOff: true })
 @Component({
-	selector: 'uni-details',
-	templateUrl: 'uni-details.html'
+	selector: 'university-details',
+	templateUrl: 'university-details.html'
 })
-export class UniDetailsPage {
-	get uni(): Uni {
-		return this.navParams.get("uni");
+export class UniversityDetailsPage {
+	get university(): University {
+		return this.navParams.get("university");
 	}
 
 	constructor(

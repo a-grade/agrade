@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Wove } from 'aspect.js';
 
-import { ModuleListPage, UniDetailsPage } from '../../pages';
+import { ModuleListPage, UniversityDetailsPage } from '../../pages';
 
-import { Uni, Major } from '../../models';
+import { University, Major } from '../../models';
 
 import { DatabaseService, StateService } from '../../services';
 
@@ -14,8 +14,8 @@ import { DatabaseService, StateService } from '../../services';
 	templateUrl: 'major-list.html'
 })
 export class MajorListPage {
-	get selectedUni(): Uni {
-		return this.navParams.get('uni');
+	get selectedUniversity(): University {
+		return this.navParams.get('university');
 	};
 
 	majors: Major[];
@@ -33,26 +33,26 @@ export class MajorListPage {
 		if (previouslySelectedMajor) {
 			this.majorSelected(previouslySelectedMajor);
 		} else {
-			this.dbService.getMajors(this.selectedUni).subscribe(majors => {
+			this.dbService.getMajors(this.selectedUniversity).subscribe(majors => {
 				this.majors = majors;
 			});
 		}
 	};
 
-	backToUniList() {
-		this.stateService.setCurrentUni(null);
+	backToUniversityList() {
+		this.stateService.setCurrentUniversity(null);
 	};
 
-	goToUniDetails() {
-		this.navCtrl.push(UniDetailsPage, {
-			uni : this.selectedUni
+	goToUniversityDetails() {
+		this.navCtrl.push(UniversityDetailsPage, {
+			university : this.selectedUniversity
 		});
 	};
 
 	majorSelected(major) {
 		this.stateService.setCurrentMajor(major);
 		this.navCtrl.push(ModuleListPage, {
-			uni: this.selectedUni,
+			university: this.selectedUniversity,
 			major: major,
 		});
 	};

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Wove } from 'aspect.js';
 
-import { Uni, Major } from '../models';
+import { University, Major } from '../models';
 
 @Wove()
 @Injectable()
@@ -14,11 +14,11 @@ export class StateService {
 		return JSON.parse(localStorage.getItem(key));
 	}
 
-	setCurrentUni(uni: Uni): void {
-		this.saveObject('selectedUni', uni);
+	setCurrentUniversity(university: University): void {
+		this.saveObject('selectedUniversity', university);
 	};
-	getCurrentUni(): Uni {
-		return this.getObject('selectedUni');
+	getCurrentUniversity(): University {
+		return this.getObject('selectedUniversity');
 	};
 
 	setCurrentMajor(major: Major): void {

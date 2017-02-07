@@ -1,14 +1,14 @@
 <ion-header>
 	<ion-navbar hideBackButton>
 		<ion-buttons left>
-			<button ion-button navPop icon-only (click)="backToUniList()">
+			<button ion-button navPop icon-only (click)="backToUniversityList()">
 				<ion-icon name="arrow-back"></ion-icon>
 			</button>
 		</ion-buttons>
 		<ion-title *ngIf="!majors">Agrade</ion-title>
-		<ion-title *ngIf="majors">{{this.selectedUni.shortName}} - Cursos</ion-title>
+		<ion-title *ngIf="majors">{{this.selectedUniversity.shortName}} - Cursos</ion-title>
 		<ion-buttons right>
-			<button ion-button icon-only (click)="goToUniDetails()">
+			<button ion-button icon-only (click)="goToUniversityDetails()">
 				<ion-icon name="information-circle"></ion-icon>
 			</button>
 		</ion-buttons>

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Wove } from 'aspect.js';
 
-import { Uni, Major, Module } from '../../models';
+import { University, Major, Module } from '../../models';
 
 import { MajorDetailsPage } from '../../pages'
 
@@ -15,8 +15,8 @@ import { DatabaseService, StateService } from '../../services';
 })
 
 export class ModuleListPage {
-	get selectedUni(): Uni {
-		return this.navParams.get('uni');
+	get selectedUniversity(): University {
+		return this.navParams.get('university');
 	};
 	get selectedMajor(): Major {
 		return this.navParams.get('major');
@@ -30,7 +30,7 @@ export class ModuleListPage {
 		private navParams: NavParams,
 	) {
 		dbService
-			.getModules(this.selectedUni, this.selectedMajor)
+			.getModules(this.selectedUniversity, this.selectedMajor)
 			.subscribe(modules => this.modules = modules );
 	}
 

@@ -36,7 +36,7 @@
 				text-center
 				*ngIf="modules && modules.length === 0">
 			<div>
-				Nenhuma matéria cadastrada para <strong>{{this.selectedMajor.name}}</strong> na <strong>{{this.selectedUni.name}}</strong>!
+				Nenhuma matéria cadastrada para <strong>{{this.selectedMajor.name}}</strong> na <strong>{{this.selectedUniversity.name}}</strong>!
 			</div>
 			<br />
 			<div>
@@ -44,13 +44,13 @@
 				<a
 						target="_blank"
 						[innerHtml]="'0tho'"
-						href="mailto:marcelolopeslotufo@gmail.com?Subject={{this.selectedMajor.name}} na {{this.selectedUni.name}} sem matérias cadastradas no Agrade">
+						href="mailto:marcelolopeslotufo@gmail.com?Subject={{this.selectedMajor.name}} na {{this.selectedUniversity.name}} sem matérias cadastradas no Agrade">
 				</a>
 				ou
 				<a
 						target="_blank"
 						[innerHtml]="'MuriloDAG'"
-						href="mailto:dag.murilo@gmail.com?Subject={{this.selectedMajor.name}} na {{this.selectedUni.name}} sem matérias cadastradas no Agrade">
+						href="mailto:dag.murilo@gmail.com?Subject={{this.selectedMajor.name}} na {{this.selectedUniversity.name}} sem matérias cadastradas no Agrade">
 				</a>.
 			</div>
 		</ion-item>

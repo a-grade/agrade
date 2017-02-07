@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { Wove } from 'aspect.js';
 
-import { Uni, Major, Module } from '../models';
+import { University, Major, Module } from '../models';
 
 @Wove()
 @Injectable()
@@ -12,23 +12,23 @@ export class DatabaseService {
 	}
 
 	/*
-	* Retrieves the list of universities in the system
+	* Retrieves the list of university in the system
 	*/
-	getUnis(): FirebaseListObservable<Uni[]> {
+	getUniversities(): FirebaseListObservable<University[]> {
 		return this.af.database.list(`/universities`);
 	};
 
 	/**
 	* Retrieves a list of majors based on a selected university
 	*/
-	getMajors(uni: Uni): FirebaseListObservable<Major[]> {
-		return this.af.database.list(`/majors/${uni.$key}`);
+	getMajors(university: University): FirebaseListObservable<Major[]> {
+		return this.af.database.list(`/majors/${university.$key}`);
 	};
 
 	/**
 	* Retrieves a list of modules based on a selected university and major
 	*/
-	getModules(uni: Uni, major: Major): FirebaseListObservable<Module[]> {
-		return this.af.database.list(`/modules/${uni.$key}/${major.$key}`);
+	getModules(university: University, major: Major): FirebaseListObservable<Module[]> {
+		return this.af.database.list(`/modules/${university.$key}/${major.$key}`);
 	};
 }

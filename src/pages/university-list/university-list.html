@@ -9,18 +9,18 @@
 	<ion-list>
 		<button
 				ion-item
-				*ngFor="let uni of unis"
-				(click)="uniSelected(uni)">
+				*ngFor="let university of universities"
+				(click)="universitySelected(university)">
 			<strong>
-				{{uni.shortName}}
+				{{university.shortName}}
 			</strong>
 			<div>
-				{{uni.name}}
+				{{university.name}}
 			</div>
 		</button>
 	</ion-list>
 
 	<div text-center>
-		<ion-spinner *ngIf="!unis" name="bubbles"></ion-spinner>
+		<ion-spinner *ngIf="!universities" name="bubbles"></ion-spinner>
 	</div>
 </ion-content>

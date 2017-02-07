@@ -4,7 +4,7 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { LogAspect } from '../services';
 
-import { UniListPage } from '../pages';
+import { UniversityListPage } from '../pages';
 
 @Component({
 	templateUrl: 'app.html'
@@ -14,7 +14,7 @@ export class MyApp {
 	@ViewChild(Nav) nav: Nav;
 
 	// make university selection page the root (or first) page
-	rootPage: any = UniListPage;
+	rootPage: any = UniversityListPage;
 	pages: Array<{title: string, component: any}>;
 
 	constructor(public platform: Platform, public menu: MenuController, private logAspect: LogAspect) {
@@ -22,7 +22,7 @@ export class MyApp {
 
 		// set our app's pages
 		this.pages = [
-			{ title: 'Universidades', component: UniListPage },
+			{ title: 'Universidades', component: UniversityListPage },
 		];
 	}
 
