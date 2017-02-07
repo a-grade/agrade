@@ -15,10 +15,10 @@ import { DatabaseService, StateService } from '../../services';
 })
 
 export class ModuleListPage {
-	get selectedUniversity(): University {
+	get university(): University {
 		return this.navParams.get('university');
 	};
-	get selectedMajor(): Major {
+	get major(): Major {
 		return this.navParams.get('major');
 	};
 	modules: Module[];
@@ -30,7 +30,7 @@ export class ModuleListPage {
 		private navParams: NavParams,
 	) {
 		dbService
-			.getModules(this.selectedUniversity, this.selectedMajor)
+			.getModules(this.university, this.major)
 			.subscribe(modules => this.modules = modules );
 	}
 
@@ -40,7 +40,7 @@ export class ModuleListPage {
 
 	goToMajorDetails() {
 		this.navCtrl.push(MajorDetailsPage, {
-			major : this.selectedMajor
+			major : this.major
 		});
 	}
 

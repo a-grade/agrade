@@ -19,14 +19,14 @@ export class DatabaseService {
 	};
 
 	/**
-	* Retrieves a list of majors based on a selected university
+	* Retrieves a list of majors based on an university
 	*/
 	getMajors(university: University): FirebaseListObservable<Major[]> {
 		return this.af.database.list(`/majors/${university.$key}`);
 	};
 
 	/**
-	* Retrieves a list of modules based on a selected university and major
+	* Retrieves a list of modules based on an university and major
 	*/
 	getModules(university: University, major: Major): FirebaseListObservable<Module[]> {
 		return this.af.database.list(`/modules/${university.$key}/${major.$key}`);

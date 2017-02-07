@@ -6,7 +6,7 @@
 			</button>
 		</ion-buttons>
 		<ion-title *ngIf="!majors">Agrade</ion-title>
-		<ion-title *ngIf="majors">{{this.selectedUniversity.shortName}} - Cursos</ion-title>
+		<ion-title *ngIf="majors">{{university.shortName}} - Cursos</ion-title>
 		<ion-buttons right>
 			<button ion-button icon-only (click)="goToUniversityDetails()">
 				<ion-icon name="information-circle"></ion-icon>
@@ -33,7 +33,7 @@
 				text-center
 				*ngIf="majors && majors.length === 0">
 			<div>
-				Nenhum curso cadastrado para <strong>{{this.selectedUni.name}}</strong>!
+				Nenhum curso cadastrado para <strong>{{university.name}}</strong>!
 			</div>
 			<br />
 			<div>
@@ -41,13 +41,13 @@
 				<a
 						target="_blank"
 						[innerHtml]="'0tho'"
-						href="mailto:marcelolopeslotufo@gmail.com?Subject={{this.selectedUni.name}} sem cursos cadastrados no Agrade">
+						href="mailto:marcelolopeslotufo@gmail.com?Subject={{university.name}} sem cursos cadastrados no Agrade">
 				</a>
 				ou
 				<a
 						target="_blank"
 						[innerHtml]="'MuriloDAG'"
-						href="mailto:dag.murilo@gmail.com?Subject={{this.selectedUni.name}} sem cursos cadastrados no Agrade">
+						href="mailto:dag.murilo@gmail.com?Subject={{university.name}} sem cursos cadastrados no Agrade">
 				</a>.
 			</div>
 		</ion-item>

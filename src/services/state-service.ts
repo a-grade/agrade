@@ -15,16 +15,16 @@ export class StateService {
 	}
 
 	setCurrentUniversity(university: University): void {
-		this.saveObject('selectedUniversity', university);
+		this.saveObject('university', university);
 	};
 	getCurrentUniversity(): University {
-		return this.getObject('selectedUniversity');
+		return this.getObject('university');
 	};
 
 	setCurrentMajor(major: Major): void {
-		this.saveObject('selectedMajor', major);
+		this.saveObject('major', major);
 	};
 	getCurrentMajor(): Major {
-		return this.getObject('selectedMajor');
+		return this.getObject('major');
 	};
 }

@@ -14,7 +14,7 @@ import { DatabaseService, StateService } from '../../services';
 	templateUrl: 'major-list.html'
 })
 export class MajorListPage {
-	get selectedUniversity(): University {
+	get university(): University {
 		return this.navParams.get('university');
 	};
 
@@ -33,7 +33,7 @@ export class MajorListPage {
 		if (previouslySelectedMajor) {
 			this.majorSelected(previouslySelectedMajor);
 		} else {
-			this.dbService.getMajors(this.selectedUniversity).subscribe(majors => {
+			this.dbService.getMajors(this.university).subscribe(majors => {
 				this.majors = majors;
 			});
 		}
@@ -45,14 +45,14 @@ export class MajorListPage {
 
 	goToUniversityDetails() {
 		this.navCtrl.push(UniversityDetailsPage, {
-			university : this.selectedUniversity
+			university : this.university
 		});
 	};
 
 	majorSelected(major) {
 		this.stateService.setCurrentMajor(major);
 		this.navCtrl.push(ModuleListPage, {
-			university: this.selectedUniversity,
+			university: this.university,
 			major: major,
 		});
 	};

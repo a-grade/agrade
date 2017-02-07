@@ -6,7 +6,7 @@
 			</button>
 		</ion-buttons>
 		<ion-title *ngIf="!modules">Agrade</ion-title>
-		<ion-title *ngIf="modules">{{selectedMajor.shortName}} - Matérias</ion-title>
+		<ion-title *ngIf="modules">{{major.shortName}} - Matérias</ion-title>
 		<ion-buttons right>
 			<button ion-button icon-only (click)="goToMajorDetails()">
 				<ion-icon name="information-circle"></ion-icon>
@@ -36,7 +36,7 @@
 				text-center
 				*ngIf="modules && modules.length === 0">
 			<div>
-				Nenhuma matéria cadastrada para <strong>{{this.selectedMajor.name}}</strong> na <strong>{{this.selectedUniversity.name}}</strong>!
+				Nenhuma matéria cadastrada para <strong>{{major.name}}</strong> na <strong>{{university.name}}</strong>!
 			</div>
 			<br />
 			<div>
@@ -44,13 +44,13 @@
 				<a
 						target="_blank"
 						[innerHtml]="'0tho'"
-						href="mailto:marcelolopeslotufo@gmail.com?Subject={{this.selectedMajor.name}} na {{this.selectedUniversity.name}} sem matérias cadastradas no Agrade">
+						href="mailto:marcelolopeslotufo@gmail.com?Subject={{major.name}} na {{university.name}} sem matérias cadastradas no Agrade">
 				</a>
 				ou
 				<a
 						target="_blank"
 						[innerHtml]="'MuriloDAG'"
-						href="mailto:dag.murilo@gmail.com?Subject={{this.selectedMajor.name}} na {{this.selectedUniversity.name}} sem matérias cadastradas no Agrade">
+						href="mailto:dag.murilo@gmail.com?Subject={{major.name}} na {{university.name}} sem matérias cadastradas no Agrade">
 				</a>.
 			</div>
 		</ion-item>
