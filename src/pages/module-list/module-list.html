@@ -19,6 +19,7 @@
 	<ion-list>
 		<button
 				ion-item
+				[ngClass]="getColor(module)"
 				*ngFor="let module of modules"
 				(click)="moduleClicked(module)"
 				ng-model="module.checked">
