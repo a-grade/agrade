@@ -17,20 +17,20 @@
 
 <ion-content>
 	<ion-list>
-		<!-- <ion-item
-			item-checkbox
-			*ngFor="let module of modules"
-			class="item-checkbox"
-			ng-model="module.checked">
-			{{module.name}}
-		</ion-item> -->
-		<ion-item *ngFor="let module of modules" detail-push>
-			<ion-checkbox dark [checked]="module.checked" item-left></ion-checkbox>
-			<ion-label>{{ module.name }}</ion-label>
-			<span item-right>
-				<ion-icon name="information-circle"></ion-icon>
-			</span>
-		</ion-item>
+		<button
+				ion-item
+				*ngFor="let module of modules"
+				(click)="moduleClicked(module)"
+				ng-model="module.checked">
+			<ion-label>
+				{{ module.name }}
+			</ion-label>
+			<ion-icon
+					item-right
+					name="information-circle"
+					(click)="infoClicked(module, $event)">
+			</ion-icon>
+		</button>
 		<ion-item
 				text-wrap
 				text-center
