@@ -4,7 +4,7 @@ import { Wove } from 'aspect.js';
 
 import { University, Major, Module } from '../../models';
 
-import { MajorDetailsPage } from '../../pages'
+import { MajorDetailsPage, ModuleDetailsPage } from '../../pages'
 
 import { DatabaseService, StateService } from '../../services';
 
@@ -32,27 +32,32 @@ export class ModuleListPage {
 		dbService
 			.getModules(this.university, this.major)
 			.subscribe(modules => this.modules = modules );
-	}
+	};
 
 	backToMajorList() {
 		this.stateService.setCurrentMajor(null);
-	}
-
+	};
 	goToMajorDetails() {
 		this.navCtrl.push(MajorDetailsPage, {
 			major : this.major
 		});
-	}
-
+	};
 	moduleLocked(module) {
 		return module.checked;
-	}
-
+	};
 	moduleSelected(module) {
 		this.modules.forEach(module => {});
-	}
-
+	};
 	moduleToggleCheck(module) {
 		module.checked = !module.checked;
-	}
+	};
+	infoClicked(module, event) {
+		event.stopPropagation();
+		this.navCtrl.push(ModuleDetailsPage, {
+			module: module,
+		});
+	};
+	moduleClicked(module) {
+
+	};
 }
