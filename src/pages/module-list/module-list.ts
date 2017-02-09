@@ -6,7 +6,7 @@ import { University, Major, Module } from '../../models';
 
 import { MajorDetailsPage, ModuleDetailsPage } from '../../pages'
 
-import { DatabaseService, StateService } from '../../services';
+import { DatabaseService, StateService, LoadingService } from '../../services';
 
 @Wove()
 @Component({
@@ -26,12 +26,18 @@ export class ModuleListPage {
 	constructor(
 		private dbService: DatabaseService,
 		private stateService: StateService,
+		private loading: LoadingService,
 		private navCtrl: NavController,
 		private navParams: NavParams,
 	) {
+		this.loading.show();
+
 		dbService
 			.getModules(this.university, this.major)
-			.subscribe(modules => this.modules = modules );
+			.subscribe(modules => {
+				this.modules = modules;
+				this.loading.hide();
+			});
 	};
 
 	backToMajorList() {

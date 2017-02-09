@@ -1,1 +1,11 @@
 
+ion-loading {
+	.loading-spinner {
+		transform: scale(2);
+	}
+
+	ion-spinner * {
+		stroke: gray;
+		fill: gray !important;
+	}
+}

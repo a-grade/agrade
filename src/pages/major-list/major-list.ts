@@ -6,7 +6,7 @@ import { ModuleListPage, UniversityDetailsPage } from '../../pages';
 
 import { University, Major } from '../../models';
 
-import { DatabaseService, StateService } from '../../services';
+import { DatabaseService, StateService, LoadingService } from '../../services';
 
 @Wove()
 @Component({
@@ -23,11 +23,13 @@ export class MajorListPage {
 	constructor(
 		private dbService: DatabaseService,
 		private stateService: StateService,
+		private loading: LoadingService,
 		private navCtrl: NavController,
 		private navParams: NavParams) {
 	}
 
 	ionViewWillEnter() {
+		this.loading.show();
 		const previouslySelectedMajor = this.stateService.getCurrentMajor();
 
 		if (previouslySelectedMajor) {
@@ -35,6 +37,7 @@ export class MajorListPage {
 		} else {
 			this.dbService.getMajors(this.university).subscribe(majors => {
 				this.majors = majors;
+				this.loading.hide();
 			});
 		}
 	};

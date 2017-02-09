@@ -5,7 +5,7 @@ import { Wove } from 'aspect.js';
 import { MajorListPage } from '../../pages';
 import { University } from '../../models';
 
-import { DatabaseService, StateService } from '../../services';
+import { DatabaseService, StateService, LoadingService } from '../../services';
 
 @Wove({ level: 'log', logOff: true })
 @Component({
@@ -18,18 +18,21 @@ export class UniversityListPage {
 	constructor(
 		private dbService: DatabaseService,
 		private stateService: StateService,
+		private loading: LoadingService,
 		private navCtrl: NavController,
 		private navParams: NavParams) {
 	};
 
 	ionViewWillEnter() {
+		this.loading.show();
 		const previouslySelectedUniversity = this.stateService.getCurrentUniversity();
 
 		if (previouslySelectedUniversity) {
 			this.universitySelected(previouslySelectedUniversity);
 		} else {
 			this.dbService.getUniversities().subscribe(universities => {
-				this.universities = universities
+				this.universities = universities;
+				this.loading.hide();
 			});
 		}
 	};

@@ -2,7 +2,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { AngularFireModule } from 'angularfire2';
 
-import { DatabaseService, LogAspect, StateService } from '../services';
+import { DatabaseService, LogAspect, StateService, LoadingService } from '../services';
 
 import { MyApp } from './app.component';
 import { UniversityListPage, UniversityDetailsPage, MajorListPage, MajorDetailsPage, ModuleListPage, ModuleDetailsPage } from '../pages';
@@ -43,6 +43,7 @@ export const firebaseConfig = {
 		LogAspect,
 		DatabaseService,
 		StateService,
+		LoadingService,
 		{
 			provide: ErrorHandler,
 			useClass: IonicErrorHandler
