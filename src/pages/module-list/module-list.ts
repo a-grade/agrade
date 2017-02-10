@@ -22,12 +22,13 @@ export class ModuleListPage {
 		return this.navParams.get('major');
 	};
 	modules: Module[];
-	userStatus = {};
 
 	constructor(
 		private dbService: DatabaseService,
 		private stateService: StateService,
 		private loading: LoadingService,
+		private moduleStatusService: ModuleStatusService,
+		private dependencyService: DependencyService,
 		private navCtrl: NavController,
 		private navParams: NavParams,
 	) {
@@ -44,8 +45,8 @@ export class ModuleListPage {
 
 	private calculateBlocked(): void {
 		this.modules.forEach(module => {
-			if (module.condition.trim()) {
-				this.userStatus[module.$key] = ModuleStatus.BLOCKED;
+			if (this.dependencyService.isBlocked(module)) {
+				this.moduleStatusService.set(module, ModuleStatus.BLOCKED);
 			}
 		});
 	}
@@ -58,7 +59,7 @@ export class ModuleListPage {
 		});
 	};
 	getColor(module) {
-		switch (this.getModuleStatus(module)){
+		switch (this.moduleStatusService.get(module)){
 			case ModuleStatus.DONE:
 				return 'item-md-primary';
 			case ModuleStatus.BLOCKED:
@@ -77,30 +78,19 @@ export class ModuleListPage {
 		});
 	};
 	moduleClicked(module): void {
-		switch (this.getModuleStatus(module)) {
+		switch (this.moduleStatusService.get(module)) {
 			case ModuleStatus.DONE:
-				this.setModuleStatus(module, ModuleStatus.UNBLOCKED);
+				this.moduleStatusService.set(module, ModuleStatus.UNBLOCKED);
 				break;
 			case ModuleStatus.BLOCKED:
 				this.infoClicked(module, null);
 				break;
 			case ModuleStatus.RECUPERATION:
-				this.setModuleStatus(module, ModuleStatus.DONE);
+				this.moduleStatusService.set(module, ModuleStatus.DONE);
 				break;
 			case ModuleStatus.UNBLOCKED:
-				this.setModuleStatus(module, ModuleStatus.DONE);
+				this.moduleStatusService.set(module, ModuleStatus.DONE);
 				break;
 		};
 	};
-	setModuleStatus(module: Module, status: ModuleStatus): void {
-		if (status === ModuleStatus.UNBLOCKED) {
-			delete this.userStatus[module.$key];
-		} else {
-			this.userStatus[module.$key] = status;
-		}
-	};
-	getModuleStatus(module: Module): ModuleStatus {
-		const moduleKey = module.$key;
-		return this.userStatus[moduleKey] || ModuleStatus.UNBLOCKED;
-	};
-}
+};
