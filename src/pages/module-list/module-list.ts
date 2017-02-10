@@ -2,18 +2,11 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Wove } from 'aspect.js';
 
-import { University, Major, Module } from '../../models';
+import { University, Major, Module, ModuleStatus } from '../../models';
 
 import { MajorDetailsPage, ModuleDetailsPage } from '../../pages'
 
-import { DatabaseService, StateService, LoadingService } from '../../services';
-
-enum ModuleStatus {
-	UNBLOCKED = 0,
-	DONE = 1,
-	BLOCKED = 2,
-	RECUPERATION = 3,
-};
+import { DatabaseService, StateService, LoadingService, DependencyService, ModuleStatusService } from '../../services';
 
 @Wove({ logOff: true })
 @Component({
